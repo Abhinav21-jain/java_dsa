@@ -1,0 +1,28 @@
+import java.io.;
+import java.util.;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+         write your code here
+        int x = 9;
+        int y = 99;
+        int n = number(x, y);
+        System.out.println(n);
+    }
+    public static int number(int x, int y){
+        for(int i = x; i = y; i++){
+            boolean haveroot = iroot(i, 6);
+            if(haveroot){
+                return i;
+            }
+        }
+        return y;
+    }
+    
+    private static boolean iroot(int value, int n){
+        double a = Math.pow(value, 1.0  n);
+        return Math.pow(Math.round(a), n) == value;
+    }
+
+}

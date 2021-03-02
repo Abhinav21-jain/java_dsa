@@ -1,0 +1,66 @@
+1. You are given a number n, representing the number of days.
+2. You are given n numbers, where ith number represents price of stock on ith day.
+3. You are given a number k, representing the number of transactions allowed.
+3. You are required to print the maximum profit you can make if you are allowed k transactions at-most.
+Note - There can be no overlapping transaction. One transaction needs to be closed (a buy followed by a sell) before opening another transaction (another buy).
+Input Format
+A number n
+.. n more elements
+A number k
+Output Format
+A number representing the maximum profit you can make if you are allowed a single transaction.
+
+Constraints
+0 <= n <= 20
+0 <= n1, n2, .. <= 10
+0 <= k <= n / 2
+Sample Input
+6
+9
+6
+7
+6
+3
+8
+1
+
+Sample Output
+5
+
+Program
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++){
+            arr[i] = scn.nextInt();
+        }
+        int k = scn.nextInt();
+        
+        int[][] dp = new int[k + 1][n];
+        
+        for(int i = 1; i <= k; i++){
+            int max = Integer.MIN_VALUE;
+            for(int j = 1; j < n; j++){
+                if(dp[i - 1][j - 1] - arr[j - 1] > max){
+                    max = dp[i - 1][j - 1] - arr[j - 1];
+                }
+                if(max + arr[j] > dp[i][j - 1]){
+                    dp[i][j] = max + arr[j];
+                }
+                else{
+                    dp[i][j] = dp[i][j - 1];
+                }
+            }
+        }
+        System.out.println(dp[k][n - 1]);
+    }
+
+}
